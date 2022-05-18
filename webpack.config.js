@@ -12,7 +12,7 @@ const target = process.env.NODE_ENV === 'production' ? 'browserslist' : 'web'
 const plugins = [
 	new CleanWebpackPlugin(),
 	new HtmlWebpackPlugin({
-		template: './src/index.html',
+		template: './public/index.html',
 	}),
 	new MiniCssExtractPlugin({
 		filename: '[name].css',
@@ -30,7 +30,7 @@ module.exports = {
 	entry: './src/index.tsx',
 	devtool: 'source-map',
 	output: {
-		path: path.resolve(__dirname, 'dist'),
+		path: path.resolve(__dirname, 'build'),
 		assetModuleFilename: 'assets/[hash][ext][query]',
 		clean: true,
 	},
