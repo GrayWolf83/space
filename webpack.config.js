@@ -10,13 +10,13 @@ const mode =
 const target = process.env.NODE_ENV === 'production' ? 'browserslist' : 'web'
 
 const plugins = [
-	new CleanWebpackPlugin(),
 	new HtmlWebpackPlugin({
 		template: './public/index.html',
 	}),
 	new MiniCssExtractPlugin({
 		filename: '[name].css',
 	}),
+	new CleanWebpackPlugin(),
 ]
 
 if (process.env.SERVE) {
@@ -41,9 +41,9 @@ module.exports = {
 	},
 	module: {
 		rules: [
-			{ test: /\.(html)$/, use: ['html-loader'] },
+			{ test: /\.(html)$/, use: 'html-loader' },
 			{
-				test: /\.(s[ac]|c)ss$/i, // /\.(le|c)ss$/i если вы используете less
+				test: /\.(s[ac]|c)ss$/i,
 				use: [
 					MiniCssExtractPlugin.loader,
 					'css-loader',
@@ -55,6 +55,13 @@ module.exports = {
 				test: /\.tsx?$/,
 				exclude: /node_modules/,
 				use: ['ts-loader'],
+			},
+			{
+				test: /\.(png|jpe?g|gif)$/i,
+				loader: 'file-loader',
+				options: {
+					name: 'images/[name].[ext]',
+				},
 			},
 		],
 	},
