@@ -13,13 +13,18 @@ html, body {
     color: $white_color;
 }
 
+a {
+    text-decoration: none;
+    color: $white_color;
+}
+
 .app {
     width: 100%;
     min-height: 100vh;
     background: linear-gradient(0deg, rgb(61, 0, 90) 20%, rgb(173, 149, 176) 120%);
 }
 
-h1, h2 {
+h1, h2, h3, h4, p {
     margin: 0;
 }
 
@@ -36,4 +41,14 @@ h1, h2 {
 
 .mt-2 {
     margin-top: 2rem;
+}
+
+.title {
+    font-weight: 700;
+    font-size: 2rem;
+}
+
+.subtitle {
+    font-weight: 700;
+    font-size: 1.2rem;
 }

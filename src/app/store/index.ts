@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit'
 import errorReducer from './error'
+import launchReducer from './launch'
 
 const store = configureStore({
 	reducer: {
 		errors: errorReducer,
+		launches: launchReducer,
 	},
 })
 

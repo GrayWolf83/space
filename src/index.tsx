@@ -6,6 +6,8 @@ import './styles/index.scss'
 import store from './app/store'
 import { Provider } from 'react-redux'
 
+const img = '../public/no-image.png'
+
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
 	<Provider store={store}>
