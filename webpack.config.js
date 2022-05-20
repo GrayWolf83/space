@@ -3,6 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const CopyPlugin = require('copy-webpack-plugin')
 
 const mode =
 	process.env.NODE_ENV === 'production' ? 'production' : 'development'
@@ -10,12 +11,15 @@ const mode =
 const target = process.env.NODE_ENV === 'production' ? 'browserslist' : 'web'
 
 const plugins = [
-	new CleanWebpackPlugin(),
 	new HtmlWebpackPlugin({
-		template: './src/index.html',
+		template: './public/index.html',
 	}),
 	new MiniCssExtractPlugin({
 		filename: '[name].css',
+	}),
+	new CleanWebpackPlugin(),
+	new CopyPlugin({
+		patterns: [{ from: 'public/images', to: 'images' }],
 	}),
 ]
 
@@ -30,7 +34,7 @@ module.exports = {
 	entry: './src/index.tsx',
 	devtool: 'source-map',
 	output: {
-		path: path.resolve(__dirname, 'dist'),
+		path: path.resolve(__dirname, 'build'),
 		assetModuleFilename: 'assets/[hash][ext][query]',
 		clean: true,
 	},
@@ -41,20 +45,23 @@ module.exports = {
 	},
 	module: {
 		rules: [
-			{ test: /\.(html)$/, use: ['html-loader'] },
+			{ test: /\.(html)$/, use: 'html-loader' },
 			{
-				test: /\.(s[ac]|c)ss$/i, // /\.(le|c)ss$/i если вы используете less
-				use: [
-					MiniCssExtractPlugin.loader,
-					'css-loader',
-					'postcss-loader',
-					'sass-loader',
-				],
+				test: /\.(s[ac]|c)ss$/i,
+				use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
 			},
 			{
 				test: /\.tsx?$/,
 				exclude: /node_modules/,
 				use: ['ts-loader'],
+			},
+			{
+				test: /\.(png|jpe?g|gif)$/i,
+				use: [
+					{
+						loader: 'file-loader',
+					},
+				],
 			},
 		],
 	},

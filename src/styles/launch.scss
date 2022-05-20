@@ -1,0 +1,37 @@
+.launch {
+    display: flex;
+    justify-content: flex-start;
+
+    .launch__image-block, .launch__text-block {
+        flex-basis: 30%;
+    }
+
+    .launch__text-block {
+        flex-basis: 70%;
+    }
+
+    .launch__image-item {
+        width: auto;
+        height: 200px;
+    }
+}
+
+@media (max-width: 768px) {
+    .launch {
+        flex-wrap: wrap;
+
+        .launch__title {
+            text-align: center;
+        }
+    
+        .launch__image-block, .launch__text-block {
+            flex-basis: 100%;
+            padding: 5px;
+        }
+
+        .launch__image-block {
+            display: flex;
+            justify-content: center;
+        }
+    }
+}
