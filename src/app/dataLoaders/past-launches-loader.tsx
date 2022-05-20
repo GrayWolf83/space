@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import Loader from '../components/common/loader'
 import { useAppDispatch, useAppSelector } from '../hooks/use-app-redux-hooks'
 import {
 	getPastLaunchesLoaded,
@@ -21,7 +22,7 @@ const PastLaunchesLoader = ({ children }: IProps) => {
 		}
 	}, [])
 
-	return isLoading ? <p>Loading...</p> : children
+	return isLoading ? <Loader /> : children
 }
 
 export default PastLaunchesLoader

@@ -1,0 +1,32 @@
+.pagination {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 5px;
+
+    .pagination__button {
+        cursor: pointer;
+        padding: 7px 17px;
+        border-radius: 15px;
+        border: 2px solid $white_color;
+        background-color: $white_color;
+        color: $main_color;
+        font-weight: 700;
+        font-size: 1.2rem;
+        opacity: 0.9;
+        transition: all 0.2s ease-in-out;
+
+        &:hover {
+            opacity: 1;
+        }
+
+        &:disabled {
+            opacity: 0;
+            cursor:auto; 
+        }
+    }
+
+    .pagination__text {
+        font-style: italic;
+    }
+}

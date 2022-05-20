@@ -3,6 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const CopyPlugin = require('copy-webpack-plugin')
 
 const mode =
 	process.env.NODE_ENV === 'production' ? 'production' : 'development'
@@ -17,6 +18,9 @@ const plugins = [
 		filename: '[name].css',
 	}),
 	new CleanWebpackPlugin(),
+	new CopyPlugin({
+		patterns: [{ from: 'public/images', to: 'images' }],
+	}),
 ]
 
 if (process.env.SERVE) {
@@ -44,12 +48,7 @@ module.exports = {
 			{ test: /\.(html)$/, use: 'html-loader' },
 			{
 				test: /\.(s[ac]|c)ss$/i,
-				use: [
-					MiniCssExtractPlugin.loader,
-					'css-loader',
-					'postcss-loader',
-					'sass-loader',
-				],
+				use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
 			},
 			{
 				test: /\.tsx?$/,
@@ -58,10 +57,11 @@ module.exports = {
 			},
 			{
 				test: /\.(png|jpe?g|gif)$/i,
-				loader: 'file-loader',
-				options: {
-					name: 'images/[name].[ext]',
-				},
+				use: [
+					{
+						loader: 'file-loader',
+					},
+				],
 			},
 		],
 	},

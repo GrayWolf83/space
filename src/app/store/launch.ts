@@ -152,17 +152,18 @@ export const removeBookingLaunch = (id: string) => (dispatch: AppDispatch) => {
 	dispatch(bookingLaunchRemoved(id))
 }
 
-export const changeBookingLaunch =
-	(id: string) => (state: RootState, dispatch: AppDispatch) => {
-		const bookingLaunch = state.launches.booking.entities.find(
-			(item) => item.id === id,
-		)
-		const upcomingLaunch = state.launches.upcoming.entities.find(
-			(item) => item.id === id,
-		)
+export const getLaunchById = (id: string) => (state: RootState) => {
+	const launchPast = state.launches.past.entities.find(
+		(item) => item.id === id,
+	)
+	const launchUpcoming = state.launches.upcoming.entities.find(
+		(item) => item.id === id,
+	)
+	const launchBooking = state.launches.booking.entities.find(
+		(item) => item.id === id,
+	)
 
-		if (bookingLaunch && !upcomingLaunch) {
-		}
-	}
+	return launchPast || launchUpcoming || launchBooking
+}
 
 export default launchSlice.reducer
